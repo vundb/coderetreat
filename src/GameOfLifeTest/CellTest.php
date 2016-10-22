@@ -105,6 +105,16 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell->calculateNextState());
     }
 
+    public function testIsGivenCellYourNeighbour()
+    {
+        $cell = new Cell();
+
+        $neighbours = [new Cell()];
+        $cell->setNeighbours($neighbours);
+
+        $this->assertTrue($cell->isCellYourNeighbour($neighbours[0]));
+    }
+
     ########
 
     /**

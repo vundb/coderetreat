@@ -100,4 +100,14 @@ class Cell
 
         return false;
     }
+
+    /**
+     * @param Cell $cell
+     *
+     * @return bool
+     */
+    public function isCellYourNeighbour(Cell $cell)
+    {
+        return in_array($cell, $this->neighbours);
+    }
 }
