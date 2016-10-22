@@ -59,7 +59,13 @@ class Cell
      */
     public function setNeighbours(array $neighbours)
     {
-        $this->neighbours = $neighbours;
+        $this->neighbours = [];
+
+        foreach ($neighbours as $neighbour) {
+            if (null !== $neighbour) {
+                array_push($this->neighbours, $neighbour);
+            }
+        }
     }
 
     /**
@@ -93,5 +99,15 @@ class Cell
         }
 
         return false;
+    }
+
+    /**
+     * @param Cell $cell
+     *
+     * @return bool
+     */
+    public function isCellYourNeighbour(Cell $cell)
+    {
+        return in_array($cell, $this->neighbours);
     }
 }
