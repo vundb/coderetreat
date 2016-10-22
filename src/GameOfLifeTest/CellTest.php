@@ -2,6 +2,8 @@
 
 namespace GameOfLifeTest;
 
+use GameOfLife\Cell;
+
 /**
  * Class GameOfLifeTest
  *
@@ -9,11 +11,10 @@ namespace GameOfLifeTest;
  */
 class CellTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     *
-     */
-    public function testNothing()
+    public function testIsAlive()
     {
-        $this->assertTrue(true);
+        $cell = new Cell(true);
+
+        $this->assertTrue($cell->isAlive());
     }
 }
