@@ -24,4 +24,20 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($x, $coord->getX());
         $this->assertEquals($y, $coord->getY());
     }
+
+    /**
+     * @covers \GameOfLife\Coordinate
+     */
+    public function testGetterAndSetter()
+    {
+        $x = 11;
+        $y = 22;
+
+        $coord = new Coordinate(0, 0);
+
+        $coord->setX($x)->setY($y);
+
+        $this->assertEquals($x, $coord->getX());
+        $this->assertEquals($y, $coord->getY());
+    }
 }

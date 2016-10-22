@@ -87,14 +87,21 @@ class Cell
      */
     public function calculateNextState()
     {
-        if ($this->isAlive() && 0 == $this->countLivingNeighbours()) {
+        $livingNeighbours = $this->countLivingNeighbours();
+
+        if ($this->isAlive() && $livingNeighbours < 2) {
             return false;
         }
 
-        if ($this->isAlive() && 2 === $this->countLivingNeighbours()) {
+        if ($this->isAlive() && $livingNeighbours > 3) {
+            return false;
+        }
+
+        if ($this->isAlive() && $livingNeighbours >= 2 && $livingNeighbours <= 3) {
             return true;
         }
-        if (!$this->isAlive() && 3 === $this->countLivingNeighbours()) {
+
+        if (!$this->isAlive() && $livingNeighbours === 3) {
             return true;
         }
 
@@ -109,5 +116,27 @@ class Cell
     public function isCellYourNeighbour(Cell $cell)
     {
         return in_array($cell, $this->neighbours);
+    }
+
+    /**
+     * Set cell's state to true.
+     *
+     * @return $this
+     */
+    public function setAlive()
+    {
+        $this->state = true;
+        return $this;
+    }
+
+    /**
+     * Set cell's state to false.
+     *
+     * @return $this
+     */
+    public function setDead()
+    {
+        $this->state = false;
+        return $this;
     }
 }

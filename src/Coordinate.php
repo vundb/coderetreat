@@ -1,14 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nobik
- * Date: 22.10.16
- * Time: 16:37
- */
 
 namespace GameOfLife;
 
-
+/**
+ * Class Coordinate
+ *
+ * @package GameOfLife
+ */
 class Coordinate
 {
     /**
