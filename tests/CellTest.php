@@ -145,6 +145,18 @@ class CellTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \GameOfLife\Cell
      */
+    public function testDeadCellWithThreeLivingNeighboursWillBeBorn()
+    {
+        $cell = new Cell();
+
+        $cell->setNeighbours($this->createNeighbours(5, 3));
+
+        $this->assertTrue($cell->calculateNextState());
+    }
+
+    /**
+     * @covers \GameOfLife\Cell
+     */
     public function testIsCellYourNeighbour()
     {
         $cell = new Cell();
