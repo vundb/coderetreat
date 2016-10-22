@@ -11,6 +11,9 @@ use GameOfLife\Cell;
  */
 class CellTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers \GameOfLife\Cell
+     */
     public function testIsAlive()
     {
         $cell = new Cell(true);
@@ -18,6 +21,9 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell->isAlive());
     }
 
+    /**
+     * @covers \GameOfLife\Cell
+     */
     public function testCountNeighbours()
     {
         $cell = new Cell();
@@ -25,26 +31,34 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $cell->countNeighbours());
     }
 
+    /**
+     * @covers \GameOfLife\Cell
+     */
     public function testCountOneNewNeighbour()
     {
         $cell = new Cell();
 
-        // ACT
         $cell->addNeighbour(new Cell());
+
         $this->assertEquals(1, $cell->countNeighbours());
     }
 
+    /**
+     * @covers \GameOfLife\Cell
+     */
     public function testSetNeighbours()
     {
         $cell = new Cell();
 
         $neighbours = $this->createNeighbours(8);
-
         $cell->setNeighbours($neighbours);
 
         $this->assertEquals(count($neighbours), $cell->countNeighbours());
     }
 
+    /**
+     * @covers \GameOfLife\Cell
+     */
     public function testSetNeighboursWithNullValues()
     {
         $cell = new Cell();
@@ -52,13 +66,15 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $neighbours = $this->createNeighbours(8);
         array_push($neighbours, null);
         array_push($neighbours, null);
-
         $cell->setNeighbours($neighbours);
 
         $this->assertEquals(count($neighbours) - 2, $cell->countNeighbours());
     }
 
-    public function testCountAlive()
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testCountAliveNeighbours()
     {
         $cell = new Cell();
 
@@ -78,7 +94,10 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $cell->countLivingNeighbours());
     }
 
-    public function testGetNextState()
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellWithDeadNeighboursWillDie()
     {
         $cell = new Cell(true);
 
@@ -87,7 +106,10 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($cell->calculateNextState());
     }
 
-    public function testGetNextState2()
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellWithTwoLivingNeighboursWillSurvive()
     {
         $cell = new Cell(true);
 
@@ -96,7 +118,10 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell->calculateNextState());
     }
 
-    public function testGetNextState3()
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellWithtThreeLivingNeighboursWillSurvive()
     {
         $cell = new Cell(false);
 
@@ -105,7 +130,22 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell->calculateNextState());
     }
 
-    public function testIsGivenCellYourNeighbour()
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellWithFourLivingNeighboursWillDie()
+    {
+        $cell = new Cell(true);
+
+        $cell->setNeighbours($this->createNeighbours(4, 4));
+
+        $this->assertFalse($cell->calculateNextState());
+    }
+
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testIsCellYourNeighbour()
     {
         $cell = new Cell();
 
@@ -121,17 +161,20 @@ class CellTest extends \PHPUnit_Framework_TestCase
      * @param int $deadAmount
      * @param int $aliveAmount
      *
-     * @return array
+     * @return Cell[]
      */
     private function createNeighbours($deadAmount, $aliveAmount = 0)
     {
         $result = [];
+
         for ($i = 0; $i < $deadAmount; $i++) {
             array_push($result, new Cell());
         }
+
         for ($i = 0; $i < $aliveAmount; $i++) {
             array_push($result, new Cell(true));
         }
+
         return $result;
     }
 }

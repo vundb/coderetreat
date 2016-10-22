@@ -107,11 +107,4 @@ class Board
 
         return $this->field[$coord->getX()][$coord->getY()];
     }
-
-    /**
-     * @param Coordinate[] $alives
-     */
-    public function setAlives($alives)
-    {
-    }
 }

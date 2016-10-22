@@ -13,6 +13,9 @@ use GameOfLife\Coordinate;
  */
 class BoardTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers \GameOfLife\Board
+     */
     public function testBoardConstructor()
     {
         $board = new Board(10, 10);
@@ -21,6 +24,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($board->getStateOnField($coord));
     }
 
+    /**
+     * @covers \GameOfLife\Board
+     */
     public function testGetCell()
     {
         $board = new Board(10, 10);
@@ -28,6 +34,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Cell::class, $board->getCell(new Coordinate(5, 5)));
     }
 
+    /**
+     * @covers \GameOfLife\Board
+     */
     public function testGetCellOutOfRange()
     {
         $board = new Board(10, 10);
@@ -38,6 +47,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($board->getCell(new Coordinate(10, 5)));
     }
 
+    /**
+     * @covers \GameOfLife\Board
+     */
     public function testInitilaizeCellNeighbours()
     {
         $board = new Board(10, 10);
@@ -47,22 +59,17 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5, $board->getCell(new Coordinate(5, 9))->countNeighbours());
     }
 
+    /**
+     * @covers \GameOfLife\Board
+     */
     public function testIfCellNeighboursAreRightPointer()
     {
         $board = new Board(10, 10);
 
-        $cell1 = $board->getCell(new Coordinate(0,0));
-        $cell2 = $board->getCell(new Coordinate(1,1));
+        $cell1 = $board->getCell(new Coordinate(0, 0));
+        $cell2 = $board->getCell(new Coordinate(1, 1));
 
         $this->assertTrue($cell1->isCellYourNeighbour($cell2));
         $this->assertTrue($cell2->isCellYourNeighbour($cell1));
-    }
-    public function testSetAliveIsOk(){
-        $board = new Board(10, 10);
-
-        $board->setAlives([new Coordinate(5,4),new Coordinate(3,5)]);
-
-        $this->assertTrue($board->getCell(new Coordinate(5,4))->isAlive());
-        $this->assertTrue($board->getCell(new Coordinate(3,5))->isAlive());
     }
 }
