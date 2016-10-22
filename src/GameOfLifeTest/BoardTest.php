@@ -19,4 +19,12 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($board->getStateOnField($coord));
     }
+
+    public function testInitilaizeCellNeighbours()
+    {
+        $board = new Board(10, 10);
+
+        $this->assertEquals(8, $board->getCell(new Coordinate(5, 5))->countNeighbours());
+        $this->assertEquals(3, $board->getCell(new Coordinate(0, 0))->countNeighbours());
+    }
 }
