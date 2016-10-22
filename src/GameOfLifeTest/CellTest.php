@@ -24,4 +24,13 @@ class CellTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(0, $cell->countNeighbours());
     }
-}
+    public function testCountOneNewNeighbour()
+    {
+        $cell = new Cell();
+
+        // ACT
+        $cell->addNeighbour(new Cell());
+        $this->assertEquals(1, $cell->countNeighbours());
+    }
+
+    }

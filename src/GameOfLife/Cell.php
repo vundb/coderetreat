@@ -45,4 +45,7 @@ class Cell
     {
         return count($this->neighbours);
     }
+    public function addNeighbour(Cell $n){
+        $this->neighbours[]= $n;
+    }
 }
