@@ -92,6 +92,15 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell->calculateNextState());
     }
 
+    public function testGetNextState3()
+    {
+        $cell = new Cell(false);
+
+        $cell->setNeighbours($this->createNeighbours(5, 3));
+
+        $this->assertTrue($cell->calculateNextState());
+    }
+
     ########
 
     /**

@@ -88,6 +88,9 @@ class Cell
         if ($this->isAlive() && 2 === $this->countLivingNeighbours()) {
             return true;
         }
+        if (!$this->isAlive() && 3 === $this->countLivingNeighbours()) {
+            return true;
+        }
 
         return false;
     }
