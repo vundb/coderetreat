@@ -5,8 +5,8 @@
     "description": "",
     "autoload": {
         "psr-4": {
-            "GameOfLife\\": "src/GameOfLife/",
-            "GameOfLifeTest\\": "src/GameOfLifeTest/"
+            "GameOfLife\\": "src/",
+            "GameOfLifeTest\\": "tests/"
         }
     },
     "require": {
