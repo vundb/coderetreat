@@ -155,6 +155,30 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell->isCellYourNeighbour($neighbours[0]));
     }
 
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testSetAlive()
+    {
+        $cell = new Cell(false);
+
+        $cell->setAlive();
+
+        $this->assertTrue($cell->isAlive());
+    }
+
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testSetDead()
+    {
+        $cell = new Cell(true);
+
+        $cell->setDead();
+
+        $this->assertFalse($cell->isAlive());
+    }
+
     ########
 
     /**

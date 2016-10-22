@@ -107,4 +107,14 @@ class Board
 
         return $this->field[$coord->getX()][$coord->getY()];
     }
+
+    /**
+     * @param Coordinate[] $coords
+     */
+    public function setAliveCellsByCoordinates(array $coords)
+    {
+        foreach ($coords as $coord) {
+            $this->getCell($coord)->setAlive();
+        }
+    }
 }

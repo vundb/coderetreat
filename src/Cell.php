@@ -110,4 +110,26 @@ class Cell
     {
         return in_array($cell, $this->neighbours);
     }
+
+    /**
+     * Set cell's state to true.
+     *
+     * @return $this
+     */
+    public function setAlive()
+    {
+        $this->state = true;
+        return $this;
+    }
+
+    /**
+     * Set cell's state to false.
+     *
+     * @return $this
+     */
+    public function setDead()
+    {
+        $this->state = false;
+        return $this;
+    }
 }
