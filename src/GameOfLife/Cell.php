@@ -9,16 +9,25 @@ namespace GameOfLife;
  */
 class Cell
 {
+    /**
+     * @var bool
+     */
     private $state;
+
+    /**
+     * @var array
+     */
+    private $neighbours;
 
     /**
      * Cell constructor.
      *
      * @param boolean $state
      */
-    public function __construct($state)
+    public function __construct($state = false)
     {
         $this->state = $state;
+        $this->neighbours = [];
     }
 
     /**
@@ -27,5 +36,13 @@ class Cell
     public function isAlive()
     {
         return $this->state;
+    }
+
+    /**
+     * @return int
+     */
+    public function countNeighbours()
+    {
+        return count($this->neighbours);
     }
 }
