@@ -45,7 +45,20 @@ class Cell
     {
         return count($this->neighbours);
     }
-    public function addNeighbour(Cell $n){
-        $this->neighbours[]= $n;
+
+    /**
+     * @param Cell $n
+     */
+    public function addNeighbour(Cell $n)
+    {
+        $this->neighbours[] = $n;
+    }
+
+    /**
+     * @param array $neighbours
+     */
+    public function setNeighbours(array $neighbours)
+    {
+        $this->neighbours = $neighbours;
     }
 }
