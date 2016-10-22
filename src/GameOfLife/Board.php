@@ -48,6 +48,7 @@ class Board
         $this->field = [];
 
         $this->initField();
+        $this->initCellNeighbours();
     }
 
     /**
@@ -63,12 +64,28 @@ class Board
         }
     }
 
+    /**
+     * Initialize cell neighbours.
+     */
     private function initCellNeighbours()
     {
         for ($i = 0; $i < $this->width; $i++) {
             for ($j = 0; $j < $this->height; $j++) {
 
+                $neighbours = [];
+
                 $cell = $this->field[$i][$j];
+
+                array_push($neighbours, $this->getCell(new Coordinate($i - 1, $j - 1)));
+                array_push($neighbours, $this->getCell(new Coordinate($i - 1, $j)));
+                array_push($neighbours, $this->getCell(new Coordinate($i - 1, $j + 1)));
+                array_push($neighbours, $this->getCell(new Coordinate($i, $j - 1)));
+                array_push($neighbours, $this->getCell(new Coordinate($i, $j + 1)));
+                array_push($neighbours, $this->getCell(new Coordinate($i + 1, $j - 1)));
+                array_push($neighbours, $this->getCell(new Coordinate($i + 1, $j)));
+                array_push($neighbours, $this->getCell(new Coordinate($i + 1, $j + 1)));
+
+                $cell->setNeighbours($neighbours);
             }
         }
     }

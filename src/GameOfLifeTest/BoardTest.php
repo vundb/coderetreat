@@ -38,11 +38,12 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($board->getCell(new Coordinate(10, 5)));
     }
 
-//    public function testInitilaizeCellNeighbours()
-//    {
-//        $board = new Board(10, 10);
-//
-//        $this->assertEquals(8, $board->getCell(new Coordinate(5, 5))->countNeighbours());
-//        $this->assertEquals(3, $board->getCell(new Coordinate(0, 0))->countNeighbours());
-//    }
+    public function testInitilaizeCellNeighbours()
+    {
+        $board = new Board(10, 10);
+
+        $this->assertEquals(8, $board->getCell(new Coordinate(5, 5))->countNeighbours());
+        $this->assertEquals(3, $board->getCell(new Coordinate(0, 0))->countNeighbours());
+        $this->assertEquals(5, $board->getCell(new Coordinate(5, 9))->countNeighbours());
+    }
 }
