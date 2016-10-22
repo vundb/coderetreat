@@ -62,6 +62,9 @@ class Cell
         $this->neighbours = $neighbours;
     }
 
+    /**
+     * @return int
+     */
     public function countLivingNeighbours()
     {
         $living = 0;
@@ -80,6 +83,10 @@ class Cell
     {
         if ($this->isAlive() && 0 == $this->countLivingNeighbours()) {
             return false;
+        }
+
+        if ($this->isAlive() && 2 === $this->countLivingNeighbours()) {
+            return true;
         }
 
         return false;

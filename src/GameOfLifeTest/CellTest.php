@@ -83,13 +83,31 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($cell->calculateNextState());
     }
 
+    public function testGetNextState2()
+    {
+        $cell = new Cell(true);
+
+        $cell->setNeighbours($this->createNeighbours(6, 2));
+
+        $this->assertTrue($cell->calculateNextState());
+    }
+
     ########
 
-    private function createNeighbours($amount)
+    /**
+     * @param int $deadAmount
+     * @param int $aliveAmount
+     *
+     * @return array
+     */
+    private function createNeighbours($deadAmount, $aliveAmount = 0)
     {
         $result = [];
-        for ($i = 0; $i < $amount; $i++) {
+        for ($i = 0; $i < $deadAmount; $i++) {
             array_push($result, new Cell());
+        }
+        for ($i = 0; $i < $aliveAmount; $i++) {
+            array_push($result, new Cell(true));
         }
         return $result;
     }
