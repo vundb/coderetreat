@@ -97,11 +97,47 @@ class CellTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \GameOfLife\Cell
      */
-    public function testLivingCellWithDeadNeighboursWillDie()
+    public function testLivingCellWithoutLivingNeighbourWillDie()
     {
         $cell = new Cell(true);
 
-        $cell->setNeighbours($this->createNeighbours(8));
+        $cell->setNeighbours($this->createNeighbours(8, 0));
+
+        $this->assertFalse($cell->calculateNextState());
+    }
+
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellWithOneLivingNeighbourWillDie()
+    {
+        $cell = new Cell(true);
+
+        $cell->setNeighbours($this->createNeighbours(7, 1));
+
+        $this->assertFalse($cell->calculateNextState());
+    }
+
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellwithFourLivingNeighboursWillDie()
+    {
+        $cell = new Cell(true);
+
+        $cell->setNeighbours($this->createNeighbours(4, 4));
+
+        $this->assertFalse($cell->calculateNextState());
+    }
+
+    /**
+     * @covers \GameOfLife\Cell
+     */
+    public function testLivingCellWithFiveLivingNeighboursWillDie()
+    {
+        $cell = new Cell(true);
+
+        $cell->setNeighbours($this->createNeighbours(3, 5));
 
         $this->assertFalse($cell->calculateNextState());
     }
@@ -121,9 +157,9 @@ class CellTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \GameOfLife\Cell
      */
-    public function testLivingCellWithtThreeLivingNeighboursWillSurvive()
+    public function testLivingCellWithThreeLivingNeighboursWillSurvive()
     {
-        $cell = new Cell(false);
+        $cell = new Cell(true);
 
         $cell->setNeighbours($this->createNeighbours(5, 3));
 
@@ -133,21 +169,9 @@ class CellTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \GameOfLife\Cell
      */
-    public function testLivingCellWithFourLivingNeighboursWillDie()
-    {
-        $cell = new Cell(true);
-
-        $cell->setNeighbours($this->createNeighbours(4, 4));
-
-        $this->assertFalse($cell->calculateNextState());
-    }
-
-    /**
-     * @covers \GameOfLife\Cell
-     */
     public function testDeadCellWithThreeLivingNeighboursWillBeBorn()
     {
-        $cell = new Cell();
+        $cell = new Cell(false);
 
         $cell->setNeighbours($this->createNeighbours(5, 3));
 
