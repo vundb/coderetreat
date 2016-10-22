@@ -63,6 +63,16 @@ class Board
         }
     }
 
+    private function initCellNeighbours()
+    {
+        for ($i = 0; $i < $this->width; $i++) {
+            for ($j = 0; $j < $this->height; $j++) {
+
+                $cell = $this->field[$i][$j];
+            }
+        }
+    }
+
     /**
      * @param Coordinate $coord
      *
