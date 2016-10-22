@@ -61,4 +61,13 @@ class Cell
     {
         $this->neighbours = $neighbours;
     }
+    public function countLivingNeighbours(){
+        $living =0;
+
+        foreach ( $this->neighbours as $n) {
+            $living += $n->isAlive()==true?1:0;
+        }
+
+        return $living;
+    }
 }

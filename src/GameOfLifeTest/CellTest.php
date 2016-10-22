@@ -53,4 +53,25 @@ class CellTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(count($neighbours), $cell->countNeighbours());
     }
+
+    public function testCountAlive()
+    {
+        $cell = new Cell();
+
+        $neighbours = [
+            new Cell(true),
+            new Cell(true),
+            new Cell(true),
+            new Cell(),
+            new Cell(),
+            new Cell(),
+            new Cell(),
+            new Cell()
+        ];
+
+        $cell->setNeighbours($neighbours);
+
+        $this->assertEquals(3, $cell->countLivingNeighbours());
+    }
+
 }
