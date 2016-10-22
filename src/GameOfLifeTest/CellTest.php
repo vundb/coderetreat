@@ -38,20 +38,24 @@ class CellTest extends \PHPUnit_Framework_TestCase
     {
         $cell = new Cell();
 
-        $neighbours = [
-            new Cell(),
-            new Cell(),
-            new Cell(),
-            new Cell(),
-            new Cell(),
-            new Cell(),
-            new Cell(),
-            new Cell()
-        ];
+        $neighbours = $this->createNeighbours(8);
 
         $cell->setNeighbours($neighbours);
 
         $this->assertEquals(count($neighbours), $cell->countNeighbours());
+    }
+
+    public function testSetNeighboursWithNullValues()
+    {
+        $cell = new Cell();
+
+        $neighbours = $this->createNeighbours(8);
+        array_push($neighbours, null);
+        array_push($neighbours, null);
+
+        $cell->setNeighbours($neighbours);
+
+        $this->assertEquals(count($neighbours) - 2, $cell->countNeighbours());
     }
 
     public function testCountAlive()

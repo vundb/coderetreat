@@ -59,7 +59,13 @@ class Cell
      */
     public function setNeighbours(array $neighbours)
     {
-        $this->neighbours = $neighbours;
+        $this->neighbours = [];
+
+        foreach ($neighbours as $neighbour) {
+            if (null !== $neighbour) {
+                array_push($this->neighbours, $neighbour);
+            }
+        }
     }
 
     /**
