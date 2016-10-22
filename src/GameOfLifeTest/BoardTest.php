@@ -57,4 +57,12 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cell1->isCellYourNeighbour($cell2));
         $this->assertTrue($cell2->isCellYourNeighbour($cell1));
     }
+    public function testSetAliveIsOk(){
+        $board = new Board(10, 10);
+
+        $board->setAlives([new Coordinate(5,4),new Coordinate(3,5)]);
+
+        $this->assertTrue($board->getCell(new Coordinate(5,4))->isAlive());
+        $this->assertTrue($board->getCell(new Coordinate(3,5))->isAlive());
+    }
 }
