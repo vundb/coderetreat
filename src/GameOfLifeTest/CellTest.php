@@ -74,4 +74,23 @@ class CellTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $cell->countLivingNeighbours());
     }
 
+    public function testGetNextState()
+    {
+        $cell = new Cell(true);
+
+        $cell->setNeighbours($this->createNeighbours(8));
+
+        $this->assertFalse($cell->calculateNextState());
+    }
+
+    ########
+
+    private function createNeighbours($amount)
+    {
+        $result = [];
+        for ($i = 0; $i < $amount; $i++) {
+            array_push($result, new Cell());
+        }
+        return $result;
+    }
 }
