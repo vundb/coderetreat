@@ -28,6 +28,16 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Cell::class, $board->getCell(new Coordinate(5, 5)));
     }
 
+    public function testGetCellOutOfRange()
+    {
+        $board = new Board(10, 10);
+
+        $this->assertNull($board->getCell(new Coordinate(10, 10)));
+        $this->assertNull($board->getCell(new Coordinate(-1, -1)));
+        $this->assertNull($board->getCell(new Coordinate(5, 10)));
+        $this->assertNull($board->getCell(new Coordinate(10, 5)));
+    }
+
 //    public function testInitilaizeCellNeighbours()
 //    {
 //        $board = new Board(10, 10);

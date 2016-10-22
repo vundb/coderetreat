@@ -80,6 +80,14 @@ class Board
      */
     public function getCell(Coordinate $coord)
     {
+        if ($coord->getX() >= $this->width || $coord->getX() < 0) {
+            return null;
+        }
+
+        if ($coord->getY() >= $this->height || $coord->getY() < 0) {
+            return null;
+        }
+
         return $this->field[$coord->getX()][$coord->getY()];
     }
 }
