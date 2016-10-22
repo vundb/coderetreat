@@ -117,4 +117,48 @@ class Board
             $this->getCell($coord)->setAlive();
         }
     }
+
+    /**
+     * Change to new generation.
+     */
+    public function tick()
+    {
+        $generation = [];
+
+        for ($i = 0; $i < $this->width; $i++) {
+            for ($j = 0; $j < $this->height; $j++) {
+                $generation[$i][$j] = $this->getCell(new Coordinate($i, $j))->calculateNextState();
+            }
+        }
+
+        for ($i = 0; $i < $this->width; $i++) {
+            for ($j = 0; $j < $this->height; $j++) {
+                if ($generation[$i][$j]) {
+                    $this->getCell(new Coordinate($i, $j))->setAlive();
+                } else {
+                    $this->getCell(new Coordinate($i, $j))->setDead();
+                }
+            }
+        }
+    }
+
+    /**
+     * Print simple board representation.s
+     */
+    public function printBoard()
+    {
+        for ($i = 0; $i < $this->width; $i++) {
+            for ($j = 0; $j < $this->height; $j++) {
+                $cell = $this->getCell(new Coordinate($i, $j));
+
+                if ($cell->isAlive()) {
+                    echo "(X) ";
+                } else {
+                    echo "( ) ";
+                }
+            }
+
+            echo "\n";
+        }
+    }
 }

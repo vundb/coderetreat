@@ -90,4 +90,47 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($board->getCell($coords[0])->isAlive());
         $this->assertTrue($board->getCell($coords[1])->isAlive());
     }
+
+    /**
+     * @covers \GameOfLife\Board
+     */
+    public function testTickWhenDeadCellWillBeBorn()
+    {
+        $board = new Board(10, 10);
+
+        $coords = [
+            new Coordinate(0, 1),
+            new Coordinate(1, 1),
+            new Coordinate(1, 0)
+        ];
+        $board->setAliveCellsByCoordinates($coords);
+        $board->tick();
+
+        $this->assertTrue($board->getCell($coords[0])->isAlive());
+        $this->assertTrue($board->getCell($coords[1])->isAlive());
+        $this->assertTrue($board->getCell($coords[2])->isAlive());
+        $this->assertTrue($board->getCell(new Coordinate(0, 0))->isAlive());
+    }
+
+    /**
+     * @covers \GameOfLife\Board
+     */
+    public function testTickWhenAllCellWillSurvive()
+    {
+        $board = new Board(10, 10);
+
+        $coords = [
+            new Coordinate(0, 0),
+            new Coordinate(0, 1),
+            new Coordinate(1, 1),
+            new Coordinate(1, 0)
+        ];
+        $board->setAliveCellsByCoordinates($coords);
+        $board->tick();
+
+        $this->assertTrue($board->getCell($coords[0])->isAlive());
+        $this->assertTrue($board->getCell($coords[1])->isAlive());
+        $this->assertTrue($board->getCell($coords[2])->isAlive());
+        $this->assertTrue($board->getCell($coords[2])->isAlive());
+    }
 }
