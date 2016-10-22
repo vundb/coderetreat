@@ -46,4 +46,15 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $board->getCell(new Coordinate(0, 0))->countNeighbours());
         $this->assertEquals(5, $board->getCell(new Coordinate(5, 9))->countNeighbours());
     }
+
+    public function testIfCellNeighboursAreRightPointer()
+    {
+        $board = new Board(10, 10);
+
+        $cell1 = $board->getCell(new Coordinate(0,0));
+        $cell2 = $board->getCell(new Coordinate(1,1));
+
+        $this->assertTrue($cell1->isCellYourNeighbour($cell2));
+        $this->assertTrue($cell2->isCellYourNeighbour($cell1));
+    }
 }
